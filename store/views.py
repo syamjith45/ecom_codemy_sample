@@ -98,26 +98,16 @@ def register_user(request):
 
 def product_list(request):
     products=Product.objects.all()
-    return render(request,'product1.html',{'products':products})
+    return render(request,'admin_product.html',{'products':products})
 
 
 def my_view(request):
     categories = Category.objects.all()
-    return render(request, 'addproduct.html', {'category': categories})
+    return render(request, 'admin_addproduct.html', {'category': categories})
 
 from .forms import ProductForm  # You need to create a form to handle the input data
 
-# def add_product(request):
-#     if request.method == 'POST':
-#         form = ProductForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('product')  # Redirect to the product list page after successful form submission
-#     else:
-#         form = ProductForm()
 
-#     categories = Category.objects.all()
-#     return render(request, 'addproduct.html', {'form': form, 'categories': categories})
 def add_product(request):
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
@@ -128,7 +118,7 @@ def add_product(request):
         form = ProductForm()
 
     categories = Category.objects.all()
-    return render(request, 'addproduct.html', {'form': form, 'categories': categories})
+    return render(request, 'admin_addproduct.html', {'form': form, 'categories': categories})
 
 
 def edit_product(request, product_id):
@@ -148,16 +138,6 @@ def edit_product(request, product_id):
 
 from django.shortcuts import render, get_object_or_404, redirect
 
-
-# def delete_product(request, product_id):
-#     product = get_object_or_404(Product, id=product_id)
-
-#     if request.method == 'POST':
-#         product.delete()
-#         # Optionally, you can add a success message
-#         return redirect('product')  # Change 'product_list' to your product list URL name
-
-#     return render(request, 'delete.html', {'product': product})
 def delete(request, product_id):
     if request.method == "POST":
         Product.objects.get(id=product_id).delete()
