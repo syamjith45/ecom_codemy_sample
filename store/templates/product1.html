@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+ <main class="container">
+    <h2>Product Management</h2>
+
+    <!-- Add a button to add new products -->
+    {% comment %} <a href="{% url 'add_product' %}" class="btn btn-primary">Add New Product</a> {% endcomment %}
+
+    <br><br>
+
+    <!-- Product table to display existing products -->
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Price</th>
+          <th>Stock</th>
+          <th>Sale Price</th>
+          <th>Actions</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Example Product 1 -->
+        {% for prod in products %}
+        <tr>
+          <td>{{prod.id}}</td>
+          <td>{{prod.p_name}}</td>
+          <td>{{prod.category}}</td>
+          <td>{{prod.price}}</td>
+          <td>{{prod.stock}}</td>
+          <td>{{prod.sale_price}}</td>
+
+          <td>
+            <a href="{% url 'update' prod.id %}" class="btn btn-info">Edit</a>
+            <form action="{% url 'delete' prod.id %}" method="POST" class="d-inline-block">
+              {% csrf_token %}
+              <input type="submit" class="btn btn-danger" value="Delete"/>
+          </form>
+        </tr>
+        {% endfor %}
+        <!-- Example Product 2 -->
+        <!-- <tr>
+          <td>2</td>
+          <td>Cricket Bat</td>
+          <td>Cricket Equipment</td>
+          <td>$40.00</td>
+          <td>30</td>
+          <td>
+            <a href="edit_product.html" class="btn btn-info">Edit</a>
+            <a href="#" class="btn btn-danger">Delete</a>
+          </td>
+        </tr> -->
+        <!-- Add more products as needed using the same structure -->
+      </tbody>
+    </table>
+  </main>
+
+
+
+
+
+
+
+{% endblock %}

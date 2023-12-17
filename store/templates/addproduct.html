@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+<div class="col-l-4">
+    <div class="row">
+        <div class="col-sm-4">
+            <!-- First partition -->
+            <!-- Your content for the first partition goes here -->
+        </div>
+        <div class="col-sm-4">
+            <!-- Second partition -->
+            <div class='form-container bg-white p-4 rounded'>
+                <h1 class="mt-4 text-center">Add Products</h1>
+
+                <form method="post" enctype="multipart/form-data" class="mt-4" action="{% url 'addproduct' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+
+                    <div class="mb-3 text-center">
+                        <button type="submit" class="btn btn-primary">Add Product</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <!-- Third partition -->
+            <!-- Your content for the third partition goes here -->
+        </div>
+    </div>
+</div>
+
+{% endblock %}
